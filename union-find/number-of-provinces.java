@@ -22,7 +22,7 @@ class Solution {
         }
         int len = adj.size();
         int count = 0;
-        boolean visited[] = new boolean[len+1];
+        boolean visited[] = new boolean[n];
         for(int i = 0;i<len;i++){
             if(!visited[i]){
                 count++;
