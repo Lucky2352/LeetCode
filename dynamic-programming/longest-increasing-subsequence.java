@@ -1,28 +1,25 @@
 class Solution {
-    int len = Integer.MIN_VALUE;
-    public void recursion(int nums[], int i, List<Integer> list, int[][] dp, int prev) {
+    public int recursion(int nums[], int i, int prev, int[][] dp) {
         if (i == nums.length) {
-            len = Math.max(len, list.size());
-            return;
+            return 0;
         }
         if (dp[i][prev + 1] != -1) {
-            return;
+            return dp[i][prev + 1];
         }
+        int take = 0;
         if (prev == -1 || nums[prev] < nums[i]) {
-            list.add(nums[i]);
-            recursion(nums, i + 1, list, dp, i);
-            list.remove(list.size() - 1);
+            take = 1 + recursion(nums, i + 1, i, dp);
         }
-        recursion(nums, i + 1, list, dp, prev);
-        dp[i][prev + 1] = len;
+        int notTake = recursion(nums, i + 1, prev, dp);
+        return dp[i][prev + 1] = Math.max(take, notTake);
     }
+
     public int lengthOfLIS(int[] nums) {
         int n = nums.length;
         int[][] dp = new int[n][n + 1];
         for (int i = 0; i < n; i++) {
             Arrays.fill(dp[i], -1);
         }
-        recursion(nums, 0, new ArrayList<>(), dp, -1);
-        return len;
+        return recursion(nums, 0, -1, dp);
     }
 }
