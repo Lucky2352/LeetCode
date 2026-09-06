@@ -14,23 +14,33 @@
  * }
  */
 class Solution {
-    public static void trav(TreeNode root, List<Integer> list) {
-        if (root == null)
-            return;
-        list.add(root.val);
-        trav(root.left, list);
-        trav(root.right, list);
-    }
-
-    public boolean isSameTree(TreeNode p, TreeNode q) {
-    List<Integer> list1 = new ArrayList<>();
-    List<Integer> list2 = new ArrayList<>();
-    trav(p,list1);
-    trav(q,list2);
-    if(list1.size() != list2.size())return false;
-    for(int i = 0;i<list1.size();i++){
-        if(list1.get(i) != list2.get(i))return false;
-    }
-    return
+    public boolean isSameTree(TreeNode t1, TreeNode t2) {
+        if (t1 == null && t2 == null) return true;
+        if (t1 == null || t2 == null) return false;
+        Queue<TreeNode> q = new LinkedList<>();
+        Queue<TreeNode> p = new LinkedList<>();
+        q.offer(t1);
+        p.offer(t2);
+        while (!q.isEmpty() && !p.isEmpty()) {
+            int size = q.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode temp1 = q.poll();
+                TreeNode temp2 = p.poll();
+                if (temp1.val != temp2.val) return false;
+                if (temp1.left == null && temp2.left != null) return false;
+                if (temp1.left != null && temp2.left == null) return false;
+                if (temp1.right == null && temp2.right != null) return false;
+                if (temp1.right != null && temp2.right == null) return false;
+                if (temp1.left != null) {
+                    q.offer(temp1.left);
+                    p.offer(temp2.left);
+                }
+                if (temp1.right != null) {
+                    q.offer(temp1.right);
+                    p.offer(temp2.right);
+                }
+            }
+        }
+        return q.isEmpty() && p.isEmpty();
     }
 }
