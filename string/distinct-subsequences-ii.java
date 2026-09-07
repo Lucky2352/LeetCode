@@ -9,10 +9,10 @@ class Solution {
             int ch = s.charAt(i - 1) - 'a';
             dp[i] = (2 * dp[i - 1]) % MOD;
             if (freq[ch] != -1) {
-                dp[i] = (dp[i] - dp[freq[ch]] + MOD) % MOD;
+                dp[i] = (dp[i] - dp[freq[ch] - 1] + MOD) % MOD;
             }
             freq[ch] = i;
         }
-        return (dp[n] - 1 + MOD) % MOD;
+        return (dp[s.length()] - 1 + MOD) % MOD;
     }
 }
