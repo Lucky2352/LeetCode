@@ -9,7 +9,7 @@
  */
 class Solution {
     Map<TreeNode,TreeNode> map = new HashMap<>();
-    public static void dfs(TreeNode root){
+    public void dfs(TreeNode root){
         if(root == null)return;
         if(root.left != null){
             map.put(root.left,root);
@@ -37,6 +37,7 @@ class Solution {
                 return ans;
             }
             for (int i = 0; i < size; i++) {
+                TreeNode node = q.poll();
                 if (node.left != null && !visited.contains(node.left)) {
                     visited.add(node.left);
                     q.add(node.left);
