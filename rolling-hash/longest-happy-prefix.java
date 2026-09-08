@@ -19,10 +19,6 @@ class Solution {
                 }
             }
         }
-        int maxi = 0;
-        for(int num : arr){
-            maxi = Math.max(maxi,num);
-        }
-        return s.substring(0,maxi);
+        return s.substring(0,arr[arr.length - 1]);
     }
 }
