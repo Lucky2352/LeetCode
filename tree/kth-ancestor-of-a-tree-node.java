@@ -5,14 +5,14 @@ class TreeAncestor {
         for (int i = 0; i < n; i++) {
             up.add(new ArrayList<>());
 
-            for (int j = 0; j < LOG; j++) {
+            for (int j = 0; j < 20; j++) {
                 up.get(i).add(-1);
             }
         }
         for (int node = 0; node < n; node++) {
             up.get(node).set(0, parent[node]);
         }
-        for (int j = 1; j < LOG; j++) {
+        for (int j = 1; j < 20; j++) {
             for (int node = 0; node < n; node++) {
                 int a = up.get(node).get(j - 1);
                 if (a != -1) {
