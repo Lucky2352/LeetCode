@@ -1,17 +1,23 @@
 class Solution {
-    int count = 0;
-    public void recursion(int i,int n){
+    public int recursion(int i,int n,int[] dp){
         if(i == n){
-            count++;
-            return;
+            return 1;
         }
-        recursion(i+1,n);
+        int total = 0;
+        if(dp[i] != 0)return dp[i];
+        if(i + 1 <= n){
+        total += recursion(i+1,n,dp);
+        dp[i] = total;
+        }
         if(i + 2 <= n){
-            recursion(i+2,n);
+            total += recursion(i+2,n,dp);
+            dp[i] = total;
         }
+        return total;
+
     }
     public int climbStairs(int n) {
-        recursion(0,n);
-        return count;
+        int dp[] = new int[n + 1];
+        return recursion(0,n,dp);
     }
 }
