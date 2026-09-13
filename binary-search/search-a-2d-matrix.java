@@ -9,9 +9,9 @@ class Solution {
             if(matrix[mid/m][mid%m] == target){
                 return true;
             }else if(matrix[mid/m][mid%m] < target){
-                high = mid - 1;
-            }else{
                 low = mid + 1;
+            }else{
+                high = mid - 1;
             }
         }
         return false;
